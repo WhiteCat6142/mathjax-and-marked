@@ -11,14 +11,14 @@ jobs:
           submodules: true
       - name: Get Version
         id: get
-        run: git submodule status>substat.txt
+        run: echo "::set-output name=ver::$(git submodule status)
         shell: bash
       - name: Cache
         uses: actions/cache@v3
         id: cache
         with:
           path: mathjax-src/es5
-          key: id-${{ hashFiles('substat.txt') }}
+          key: id-${{ steps.get.outputs.ver }}
       - name: Setup
         if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/setup-node@v3
@@ -39,6 +39,7 @@ jobs:
       - name: Packing
         run: |
           mkdir ./public
+          pwd
           cp ./MathJax-v3-and-Marked.html ./public
           mkdir -p ./public/mathjax-src/es5
           cp ./mathjax-src/es5/tex-mml-chtml.js ./public/mathjax-src/es5/tex-mml-chtml.js

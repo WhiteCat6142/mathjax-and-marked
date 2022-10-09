@@ -38,12 +38,12 @@ jobs:
         run: ./bin/makeAll
       - name: Packing
         run: |
-          mkdir public
-          cp MathJax-v3-and-Marked.html public
-          mkdir -p public/mathjax-src/es5
-          cp mathjax-src/es5/tex-mml-chtml.js public/mathjax-src/es5/tex-mml-chtml.js
-          mkdir -p public/marked
-          cp marked/marked.min.js public/marked/marked.min.js
+          mkdir ./public
+          cp ./MathJax-v3-and-Marked.html ./public
+          mkdir -p ./public/mathjax-src/es5
+          cp ./mathjax-src/es5/tex-mml-chtml.js ./public/mathjax-src/es5/tex-mml-chtml.js
+          mkdir -p ./public/marked
+          cp ./marked/marked.min.js ./public/marked/marked.min.js
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

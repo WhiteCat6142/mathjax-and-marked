@@ -11,7 +11,7 @@ jobs:
           submodules: true
       - name: Get Version
         id: get
-        run: echo "::set-output name=ver::$(git submodule status)
+        run: echo "::set-output name=ver::$(git submodule status)"
         shell: bash
       - name: Cache
         uses: actions/cache@v3

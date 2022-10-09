@@ -1,0 +1,29 @@
+name: gh-pages
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install
+        working-directory: mathjax-src
+        run: npm install
+      - name: Build
+        working-directory: mathjax-src
+        run: npm run compile
+      - name: Components
+        working-directory: mathjax-src/components
+        run: ./bin/makeAll
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .

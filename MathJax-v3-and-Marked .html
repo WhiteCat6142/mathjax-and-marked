@@ -9,11 +9,6 @@
   <script>
     MathJax = {
       tex: { inlineMath: [['<code>', '</code>'], ['$', '$'], ['\\(', '\\)']] },
-      /*svg: { 
-      //fontCache: 'global'
-      //useGlobalCache:false,
-      fontCache:"none" },*/
-      //"HTML-CSS": {availableFonts:[]},
       chtml: { scale: 1 },
       startup: {
         ready: function () {
@@ -26,7 +21,6 @@
   <script id="MathJax-script" async src="./mathjax-src/es5/tex-mml-chtml.js""></script>
   <script src="./marked/marked.min.js"></script>
   <script>
-    //  const marked = require('marked');
     const tokenizer = {
       text(src) {
         const match = src.match(/(\$|\$\$)([^\$]+?)(\$|\$\$)/);
@@ -37,12 +31,9 @@
             text: match[2].trim()
           };
         }
-
-        // return false to use original codespan tokenizer
         return true;
       }
     };
-    //marked.setOptions({ breaks: true });
 
     marked.use({ tokenizer });
 
@@ -155,26 +146,15 @@
     <div id="in">
       <h1>MathJax v3 &amp; Marked : TeX &amp; Markdown</h1>
 
-      <textarea id="input" rows="15" cols="10">&lt;!--  Enter HTML containing TeX or MathML below --&gt;
+      <textarea id="input" rows="15" cols="10">&lt;small&gt;My Name&lt;/small&gt;
 
-If $a \ne 0$, then $ax^2 + bx + c = 0$ has two solutions,
-$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+---
 
-As MathML:
-&lt;math&gt;
-  &lt;mi&gt;a&lt;/mi&gt;
-  &lt;msup&gt;
-    &lt;mi&gt;x&lt;/mi&gt;
-    &lt;mn&gt;2&lt;/mn&gt;
-  &lt;/msup&gt;
-  &lt;mo&gt;+&lt;/mo&gt;
-  &lt;mi&gt;b&lt;/mi&gt;
-  &lt;mi&gt;x&lt;/mi&gt;
-  &lt;mo&gt;+&lt;/mo&gt;
-  &lt;mi&gt;c&lt;/mi&gt;
-  &lt;mo&gt;=&lt;/mo&gt;
-  &lt;mn&gt;0&lt;/mn&gt;
-&lt;/math&gt;.
+### Problem 1
+>(1)$f(x)=0$ \
+texting.
+\[y=e^x\]
+sentence.
 </textarea>
       <br>
       <div class="right">

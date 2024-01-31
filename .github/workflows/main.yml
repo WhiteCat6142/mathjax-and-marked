@@ -20,29 +20,17 @@ jobs:
           path: mathjax-src/es5
           key: id-${{ steps.get.outputs.ver }}
       - name: Setup
-        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - name: Install
-        if: steps.cache.outputs.cache-hit != 'true'
-        working-directory: mathjax-src
-        run: npm install
-      - name: Build
-        if: steps.cache.outputs.cache-hit != 'true'
-        working-directory: mathjax-src
-        run: npm run compile
-      - name: Components
-        if: steps.cache.outputs.cache-hit != 'true'
-        working-directory: mathjax-src/components
-        run: npx webpack ./src/tex-mml-chtml/tex-mml-chtml.js
-      - name: Packing
+          node-version: 20
+      - name: Mathjax
         run: |
           mkdir ./public
-          pwd
+          npm install mathjax@3
+          mv node_modules/mathjax/es5 ./public/mathjax-src
+      - name: Packing
+        run: |
           cp ./MathJax-v3-and-Marked.html ./public
-          mkdir -p ./public/mathjax-src/es5
-          cp ./mathjax-src/es5/tex-mml-chtml.js ./public/mathjax-src/es5/tex-mml-chtml.js
           mkdir -p ./public/marked
           cp ./marked/marked.min.js ./public/marked/marked.min.js
       - name: Deploy
